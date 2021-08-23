@@ -1,7 +1,38 @@
 const express = require('express');
-const app = express();
 const request = require('request');
+const mongoose = require('mongoose');
+const bodyparser = require('body-parser')
+require('dotenv').config();
+const app = express();
 
+// capturar body 
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
+
+//conexion a BD
+const uri = `mongodb+srv://admin:${process.env.PASSWORD}@cluster0.lwm4s.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+const option = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+mongoose.connect(uri, option).then(() => {
+    console.log('Conexion BD')
+}).catch(e => console.log(e))
+
+//import rutas
+const authRoutes = require('./routes/auth');
+const dashboadRoutes = require('./routes/dashboard');
+const verifyToken = require('./middleware/validate-token');
+//route middlewares
+app.use('/api/user', authRoutes);
+app.use('/api/dashboard', verifyToken, dashboadRoutes);
+
+app.get('/', (req, res) => {
+    res.json({
+        estado: true,
+        mensaje: 'funciona'
+    })
+})
 app.get('/launch', (req, res) => {
     const username = 'pruebas';
     const password = 'password';
@@ -24,12 +55,13 @@ app.get('/launch', (req, res) => {
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
-        res.send(response.body)
+        res.json(response.body)
         console.log(response.body)
     })
 })
 
-
-app.listen(3333, () => {
-    console.log('Application listening on port 3333!');
+// iniciae server
+const PORT = process.env.PORT || 3333
+app.listen(PORT, () => {
+    console.log(`Application listening on port ${PORT} !`);
 });
