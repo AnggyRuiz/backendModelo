@@ -5,6 +5,16 @@ const bodyparser = require('body-parser')
 require('dotenv').config();
 const app = express();
 
+
+// cors
+const cors = require('cors');
+var corsOptions = {
+    origin: '*', // Reemplazar con dominio
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
+
+
 // capturar body 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
