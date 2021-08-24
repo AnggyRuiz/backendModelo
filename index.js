@@ -37,12 +37,16 @@ const verifyToken = require('./middleware/validate-token');
 app.use('/api/user', authRoutes);
 app.use('/api/dashboard', verifyToken, dashboadRoutes);
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.json({
         estado: true,
         mensaje: 'funciona'
     })
-})
+}) */
+// Middleware para Vue.js router modo history
+const history = require('connect-history-api-fallback');
+app.use(history());
+app.use(express.static(__dirname + "/public"));
 app.get('/launch', (req, res) => {
     const username = 'pruebas';
     const password = 'password';
