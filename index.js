@@ -1,5 +1,4 @@
 const express = require('express');
-const request = require('request');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser')
 require('dotenv').config();
@@ -31,10 +30,12 @@ mongoose.connect(uri, option).then(() => {
 
 //import rutas
 const authRoutes = require('./routes/auth');
+const tusDatos = require('./routes/tusDatos');
 const dashboadRoutes = require('./routes/dashboard');
 const verifyToken = require('./middleware/validate-token');
 //route middlewares
 app.use('/api/user', authRoutes);
+app.use('/api', tusDatos);
 app.use('/api/dashboard', verifyToken, dashboadRoutes);
 
 /* app.get('/', (req, res) => {
@@ -47,32 +48,8 @@ app.use('/api/dashboard', verifyToken, dashboadRoutes);
 const history = require('connect-history-api-fallback');
 app.use(history());
 app.use(express.static(__dirname + "/public"));
-app.get('/launch', (req, res) => {
-    const username = 'pruebas';
-    const password = 'password';
-    const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-    var options = {
-        'method': 'POST',
-        'url': 'http://docs.tusdatos.co/api/launch',
-        'headers': {
-            'accept': "application/json",
-            "Content-Type": "application/json",
-            'Authorization': idToken
-        },
-        body: JSON.stringify({
-            'doc': 123,
-            'typedoc': 'CC',
-            'fechaE': '01/12/2017'
 
-        }),
 
-    };
-    request(options, function(error, response) {
-        if (error) throw new Error(error);
-        res.json(response.body)
-        console.log(response.body)
-    })
-})
 
 // iniciae server
 const PORT = process.env.PORT || 3333
