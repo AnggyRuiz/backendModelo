@@ -33,18 +33,19 @@ const authRoutes = require('./routes/auth');
 const tusDatos = require('./routes/tusDatos');
 const dashboadRoutes = require('./routes/dashboard');
 const verifyToken = require('./middleware/validate-token');
-//route middlewares
+const transaction = require('./routes/transaction')
+    //route middlewares
 app.use('/api/user', authRoutes);
 app.use('/api', tusDatos);
 app.use('/api/dashboard', verifyToken, dashboadRoutes);
-
-/* app.get('/', (req, res) => {
-    res.json({
-        estado: true,
-        mensaje: 'funciona'
-    })
-}) */
-// Middleware para Vue.js router modo history
+app.use('/api/trx', transaction)
+    /* app.get('/', (req, res) => {
+        res.json({
+            estado: true,
+            mensaje: 'funciona'
+        })
+    }) */
+    // Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');
 app.use(history());
 app.use(express.static(__dirname + "/public"));
