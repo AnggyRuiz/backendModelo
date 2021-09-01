@@ -27,7 +27,7 @@ router.get('/getTrx', (req, res) => {
     var trx = mongoose.model('transaction');
     trx.find({}, (err, data) => {
         console.log(err, data, data.length);
-        res.json(err, data)
+        res.json(data)
     });
 
 })
