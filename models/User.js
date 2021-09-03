@@ -1,3 +1,4 @@
+const { required } = require('@hapi/joi');
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
@@ -21,6 +22,10 @@ const userSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    queryNum: {
+        type: Number,
+        required: true
     }
 })
 
