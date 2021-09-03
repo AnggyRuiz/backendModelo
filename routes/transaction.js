@@ -12,6 +12,7 @@ router.post('/saveTransaction', async(req, res) => {
         typeDoc
     });
     var isId = await trxShema.findOne({ id: req.body.id });
+    var isUser = await trxShema.findOne({ idUser: req.body.idUser })
     if (!isId) {
         try {
             const trxDB = await trx.save();
@@ -23,6 +24,7 @@ router.post('/saveTransaction', async(req, res) => {
             res.status(400).json({ error })
         }
     } else {
+
         res.send('ya existe en la lista')
 
         return
