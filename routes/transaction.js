@@ -28,7 +28,7 @@ router.post('/saveTransaction', async(req, res) => {
         return
     }
 });
-router.get('/getTrx', (req, res) => {
+router.post('/getTrx', (req, res) => {
     idUser = req.body.idUser
     var trx = mongoose.model('transaction');
     trx.find({ idUser }, (err, data) => {
