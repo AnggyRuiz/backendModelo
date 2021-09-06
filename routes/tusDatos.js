@@ -30,17 +30,7 @@ router.post('/launch', async(req, res) => {
         })
     };
     request(options, function(error, response) {
-        if (error) throw new Error(error);
-        const trx = mongoose.model('User');
-        trx.findById({ _id: __id }, (err, data) => {
-            const filter = { _id: __id };
-            const update = { queryNum: data.queryNum -= 1 };
-            trx.findByIdAndUpdate(filter, update, (err, res) => {
-                if (err) throw new Error(err)
-                console.log('ACA', res);
-            })
-        })
-        res.send(response.body)
+        res.send(response.body, res)
         console.log(response.body)
     })
 })
