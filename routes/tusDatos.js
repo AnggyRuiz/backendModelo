@@ -1,21 +1,17 @@
 const router = require('express').Router();
-const client = require('../index');
 const request = require('request');
-var mongoose = require('mongoose');
-
 const username = 'pruebas';
 const password = 'password';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-router.post('/launch', async(req, res) => {
-    const __id = req.body.idUser;
+router.post('/launch', (req, res) => {
     const doc = req.body.doc;
     const typedoc = req.body.typedoc;
     const fechaE = req.body.fechaE;
     console.log(doc, typedoc, fechaE);
 
 
-    const options = {
+    var options = {
         'method': 'POST',
         'url': 'http://docs.tusdatos.co/api/launch',
         'headers': {
@@ -30,7 +26,8 @@ router.post('/launch', async(req, res) => {
         })
     };
     request(options, function(error, response) {
-        res.send(response.body, res)
+        if (error) throw new Error(error);
+        res.send(response.body)
         console.log(response.body)
     })
 })
