@@ -68,7 +68,7 @@ router.post('/register', async(req, res) => {
         res.status(400).json({ error })
     }
 })
-router.get('/getUser', (req, res) => {
+router.post('/getUser', (req, res) => {
     const __id = req.body.idUser
     const trx = mongoose.model('User');
     trx.find({ _id: __id }, (err, data) => {
