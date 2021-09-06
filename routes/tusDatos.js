@@ -33,11 +33,8 @@ router.post('/launch', async(req, res) => {
         if (error) throw new Error(error);
         const trx = mongoose.model('User');
         trx.findById({ _id: __id }, (err, data) => {
-            console.log(err, data);
-            console.log(data.queryNum);
             const filter = { _id: __id };
             const update = { queryNum: data.queryNum -= 1 };
-            console.log('aca', data.queryNum);
             trx.findByIdAndUpdate(filter, update, (err, res) => {
                 if (err) throw new Error(err)
                 console.log(res);
