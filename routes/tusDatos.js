@@ -37,10 +37,9 @@ router.post('/launch', async(req, res) => {
             const update = { queryNum: data.queryNum -= 1 };
             trx.findByIdAndUpdate(filter, update, (err, res) => {
                 if (err) throw new Error(err)
-                console.log(res);
+                console.log('ACA', res);
             })
         })
-
         res.send(response.body)
         console.log(response.body)
     })
