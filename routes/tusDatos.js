@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const request = require('request');
+var mongoose = require('mongoose');
+
 const username = 'pruebas';
 const password = 'password';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
@@ -8,6 +10,8 @@ router.post('/launch', (req, res) => {
     const doc = req.body.doc;
     const typedoc = req.body.typedoc;
     const fechaE = req.body.fechaE;
+    const queryNum = req.body.queryNum
+    const _id = req.body.id
     console.log(doc, typedoc, fechaE);
 
 
@@ -27,6 +31,13 @@ router.post('/launch', (req, res) => {
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
+        const trx = mongoose.model('User');
+        const filter = { _id: _id };
+        const update = { queryNum: queryNum };
+        trx.findByIdAndUpdate(filter, update, (err, res) => {
+            if (err) throw new Error(err)
+            console.log('ACA', res);
+        })
         res.send(response.body)
         console.log(response.body)
     })
@@ -47,6 +58,7 @@ router.post('/report', (req, res) => {
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
+
         res.send(response.body)
         console.log(response.body);
     });
