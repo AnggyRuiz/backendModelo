@@ -3,6 +3,8 @@ const User = require('../models/User');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+var mongoose = require('mongoose');
+
 const schemaRegister = Joi.object({
     name: Joi.string().min(4).max(255).required(),
     email: Joi.string().min(6).max(255).required().email(),
@@ -66,6 +68,12 @@ router.post('/register', async(req, res) => {
         res.status(400).json({ error })
     }
 })
-
-
+router.get('/getUser', (req, res) => {
+    const __id = req.body.idUser
+    const trx = mongoose.model('User');
+    trx.find({ _id: __id }, (err, data) => {
+        console.log(data);
+        res.send(data)
+    })
+})
 module.exports = router;
