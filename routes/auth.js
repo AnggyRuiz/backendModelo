@@ -84,7 +84,8 @@ router.post('/getUser', (req, res) => {
 
 router.post('/changePsw', (req, res) => {
     const _id = req.body.id
-    const newPss = req.body.password
+    const salt = await bcrypt.genSalt(10);
+    const newPss = await bcrypt.hash(req.body.password, salt);
     console.log(_id, newPss);
     const trx = mongoose.model('User');
     const filter = { _id: _id };
