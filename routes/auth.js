@@ -82,7 +82,7 @@ router.post('/getUser', (req, res) => {
     })
 })
 
-router.post('/changePsw', (req, res) => {
+router.post('/changePsw', async(req, res) => {
     const _id = req.body.id
     const salt = await bcrypt.genSalt(10);
     const newPss = await bcrypt.hash(req.body.password, salt);
