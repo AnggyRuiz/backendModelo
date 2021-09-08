@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
     queryNum: {
         type: Number,
         required: true
+    },
+    stateAccount: {
+        type: Boolean,
+        required: true
     }
 })
 
