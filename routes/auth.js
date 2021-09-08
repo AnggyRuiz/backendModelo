@@ -81,4 +81,18 @@ router.post('/getUser', (req, res) => {
         res.send(data)
     })
 })
+
+router.post('/changePsw', (req, res) => {
+    const _id = req.body.id
+    const newPss = req.body.password
+    console.log(_id, newPss);
+    const trx = mongoose.model('User');
+    const filter = { _id: _id };
+    const update = { stateAccount: true, password: newPss };
+    trx.findByIdAndUpdate(filter, update, (err, resp) => {
+        if (err) throw new Error(err)
+        console.log('ACA', resp);
+        res.json(resp)
+    })
+})
 module.exports = router;
