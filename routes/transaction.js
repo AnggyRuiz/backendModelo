@@ -13,7 +13,7 @@ router.post('/saveTransaction', async(req, res) => {
     });
     var isId = await trxShema.findOne({ id: req.body.id });
     var isUser = await trxShema.findOne({ idUser: req.body.idUser })
-    if (!isId) {
+    if (!isId && !isUser) {
         try {
             const trxDB = await trx.save();
             res.json({
