@@ -11,36 +11,16 @@ router.post('/saveTransaction', async(req, res) => {
         idUser: req.body.idUser,
         typeDoc
     });
-    var isId = await trxShema.findOne({ id: req.body.id });
-    console.log(req.body.idUser);
-    if (!isId) {
-        try {
-            const trxDB = await trx.save();
-            res.json({
-                error: null,
-                data: trxDB
-            })
-        } catch (error) {
-            res.status(400).json({ error })
-        }
-    } else {
-        console.log(isId.idUser);
-        if (req.body.idUser != isId.idUser) {
-            try {
-                const trxDB = await trx.save();
-                res.json({
-                    error: null,
-                    data: trxDB
-                })
-            } catch (error) {
-                res.status(400).json({ error })
-            }
-        } else {
-
-            res.send('ya existe en la lista')
-        }
-        return
+    try {
+        const trxDB = await trx.save();
+        res.json({
+            error: null,
+            data: trxDB
+        })
+    } catch (error) {
+        res.status(400).json({ error })
     }
+
 });
 router.post('/getTrx', (req, res) => {
     idUser = req.body.idUser
