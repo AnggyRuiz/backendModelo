@@ -85,8 +85,8 @@ router.post('/result', (req, res) => {
     });
 })
 router.post('/retry', (req, res) => {
-    console.log(req.body.jobkey);
-    const id = req.body.jobkey;
+    console.log(req.body.id);
+    const id = req.body.id;
     console.log(id);
     var options = {
         'method': 'GET',
