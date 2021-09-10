@@ -84,4 +84,25 @@ router.post('/result', (req, res) => {
         console.log(response.body);
     });
 })
+router.post('/retry', (req, res) => {
+    console.log(req.body.jobkey);
+    const id = req.body.jobkey;
+    console.log(id);
+    var options = {
+        'method': 'GET',
+        'url': `http://docs.tusdatos.co/api/retry/${id}`,
+        'headers': {
+            'accept': "application/json",
+            "Content-Type": "application/json",
+            'Authorization': idToken
+        },
+
+    };
+    request(options, function(error, response) {
+        if (error) throw new Error(error);
+        res.send(response.body)
+        console.log(response.body);
+    });
+})
+
 module.exports = router;
