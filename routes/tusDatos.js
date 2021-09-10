@@ -88,20 +88,15 @@ router.post('/retry', (req, res) => {
     console.log(req.body.id);
     const id = req.body.id;
     const typedoc = req.body.typedoc
-    console.log(id);
+    console.log(typedoc);
     var options = {
         'method': 'GET',
-        'url': 'http://docs.tusdatos.co/api/retry/',
+        'url': `http://docs.tusdatos.co/api/retry/${id}?typedoc=${typedoc}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
             'Authorization': idToken
         },
-        body: JSON.stringify({
-            id,
-            typedoc
-        })
-
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
