@@ -9,6 +9,7 @@ router.post('/saveTransaction', async(req, res) => {
         id: req.body.id,
         name: req.body.name,
         idUser: req.body.idUser,
+        jobId: req.body.jobId,
         typeDoc
     });
     try {

@@ -22,6 +22,10 @@ const trxShema = mongoose.Schema({
     idUser: {
         type: String,
         required: true
+    },
+    jobId: {
+        type: String,
+        required: true
     }
 })
 module.exports = mongoose.model('transaction', trxShema)
