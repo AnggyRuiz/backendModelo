@@ -26,7 +26,7 @@ const trxShema = mongoose.Schema({
         type: String,
         required: true
     },
-    errors: {
+    errores: {
         type: Array,
     },
     findings: {

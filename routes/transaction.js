@@ -10,7 +10,7 @@ router.post('/saveTransaction', async(req, res) => {
         name: req.body.name,
         idUser: req.body.idUser,
         jobId: req.body.jobId,
-        errors: req.body.errores,
+        errores: req.body.errores,
         findings: req.body.findings,
         typeDoc
     });
