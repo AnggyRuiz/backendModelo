@@ -12,6 +12,8 @@ router.post('/saveTransaction', async(req, res) => {
         jobId: req.body.jobId,
         errores: req.body.errores,
         findings: req.body.findings,
+        err: req.body.error,
+        finding: req.body.finding,
         typeDoc
     });
     try {
