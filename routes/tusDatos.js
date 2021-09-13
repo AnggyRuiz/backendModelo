@@ -100,7 +100,7 @@ router.post('/retry', (req, res) => {
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
-        res.send(response.body, req.body.name)
+        res.send(response.body)
         console.log(response.body);
     });
 })
