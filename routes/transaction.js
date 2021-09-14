@@ -34,6 +34,26 @@ router.post('/getTrx', (req, res) => {
         console.log(err, data, data.length);
         res.json(data)
     });
-
+});
+router.post('changeTrx', (req, res) => {
+    const _id = req.body.id
+    const trxChange = mongoose.model('transaction');
+    const filter = { _id: _id };
+    const update = {
+        id: req.body.id,
+        name: req.body.name,
+        idUser: req.body.idUser,
+        jobId: req.body.jobId,
+        errores: req.body.errores,
+        findings: req.body.findings,
+        err: req.body.error,
+        finding: req.body.finding,
+        typeDoc: req.body.typeDoc
+    };
+    trxChange.findByIdAndUpdate(filter, update, (err, resp) => {
+        if (err) throw new Error(err)
+        console.log('ACA', resp);
+        res.json(resp)
+    })
 })
 module.exports = router;
