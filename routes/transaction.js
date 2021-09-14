@@ -36,7 +36,7 @@ router.post('/getTrx', (req, res) => {
     });
 });
 router.post('changeTrx', (req, res) => {
-    const _id = req.body.id
+    const _id = req.body._id
     const trxChange = mongoose.model('transaction');
     const filter = { _id: _id };
     const update = {
