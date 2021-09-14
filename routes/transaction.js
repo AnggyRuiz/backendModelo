@@ -37,9 +37,7 @@ router.post('/getTrx', (req, res) => {
 });
 router.post('changeTrx', (req, res) => {
     const _id = req.body._id
-    const trxChange = mongoose.model('transaction');
-    const filter = { _id: _id };
-    const update = {
+    const trx = new trxShema({
         id: req.body.id,
         name: req.body.name,
         idUser: req.body.idUser,
@@ -48,7 +46,12 @@ router.post('changeTrx', (req, res) => {
         findings: req.body.findings,
         err: req.body.error,
         finding: req.body.finding,
-        typeDoc: req.body.typeDoc
+        typeDoc
+    });
+    const trxChange = mongoose.model('transaction');
+    const filter = { _id: _id };
+    const update = {
+        trx
     };
     trxChange.findByIdAndUpdate(filter, update, (err, resp) => {
         if (err) throw new Error(err)
