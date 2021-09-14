@@ -35,7 +35,7 @@ router.post('/getTrx', (req, res) => {
         res.json(data)
     });
 });
-router.post('changeTrx', (req, res) => {
+router.post('/changeTrx', (req, res) => {
     const _id = req.body._id
     const trx = new trxShema({
         id: req.body.id,
