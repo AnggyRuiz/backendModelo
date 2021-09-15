@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const request = require('request');
 var mongoose = require('mongoose');
+
 //PROD
 const username = 'sosorno@isciolab.com';
 const password = 'Telmo2021';
@@ -52,7 +53,7 @@ router.post('/report', (req, res) => {
     console.log(id);
     var options = {
         'method': 'GET',
-        'url': `  https://dash-board.tusdatos.co/api/report/${id}`,
+        'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -62,7 +63,6 @@ router.post('/report', (req, res) => {
     };
     request(options, function(error, response) {
         if (error) throw new Error(error);
-
         res.send(response.body)
         console.log(response.body);
     });
