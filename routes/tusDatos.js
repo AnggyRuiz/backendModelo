@@ -3,12 +3,12 @@ const request = require('request');
 var mongoose = require('mongoose');
 //PROD
 
-const username = 'sosorno@isciolab.com';
-const password = 'Telmo2021';
+/* const username = 'sosorno@isciolab.com';
+const password = 'Telmo2021'; */
 //Desarrollo
 
-/* const username = 'pruebas';
-const password = 'password'; */
+const username = 'pruebas';
+const password = 'password';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
 router.post('/launch', (req, res) => {
