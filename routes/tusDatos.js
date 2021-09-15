@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const request = require('request');
 var mongoose = require('mongoose');
-
-const username = 'sosorno@isciolab.com';
-const password = 'Telmo2021';
+//PROD
+/* const username = 'sosorno@isciolab.com';
+const password = 'Telmo2021'; */
+const username = 'pruebas';
+const password = 'password';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
 router.post('/launch', (req, res) => {
@@ -17,7 +19,7 @@ router.post('/launch', (req, res) => {
 
     var options = {
         'method': 'POST',
-        'url': ' https://dash-board.tusdatos.co/api/launch',
+        'url': '  http://docs.tusdatos.co/api/launch',
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -48,7 +50,7 @@ router.post('/report', (req, res) => {
     console.log(id);
     var options = {
         'method': 'GET',
-        'url': ` https://dash-board.tusdatos.co/api/report/${id}`,
+        'url': `  http://docs.tusdatos.co/api/report/${id}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -70,7 +72,7 @@ router.post('/result', (req, res) => {
     console.log(id);
     var options = {
         'method': 'GET',
-        'url': ` https://dash-board.tusdatos.co/api/results/${id}`,
+        'url': `  http://docs.tusdatos.co/api/results/${id}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -91,7 +93,23 @@ router.post('/retry', (req, res) => {
     console.log(typedoc);
     var options = {
         'method': 'GET',
-        'url': ` https://dash-board.tusdatos.co/api/retry/${id}?typedoc=${typedoc}`,
+        'url': `  http://docs.tusdatos.co/api/retry/${id}?typedoc=${typedoc}`,
+        'headers': {
+            'accept': "application/json",
+            "Content-Type": "application/json",
+            'Authorization': idToken
+        },
+    };
+    request(options, function(error, response) {
+        if (error) throw new Error(error);
+        res.send(response.body)
+        console.log(response.body);
+    });
+})
+router.post('/getPlans', (req, res) => {
+    var options = {
+        'method': 'GET',
+        'url': ' http://docs.tusdatos.co/api/plans',
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
