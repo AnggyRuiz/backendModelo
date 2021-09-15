@@ -52,7 +52,7 @@ router.post('/report', (req, res) => {
     console.log(id);
     var options = {
         'method': 'GET',
-        'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
+        'url': `  https://dash-board.tusdatos.co/api/report/${id}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
