@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const request = require('request');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 //PROD
 const username = 'sosorno@isciolab.com';
@@ -48,20 +49,18 @@ router.post('/launch', (req, res) => {
     })
 })
 router.post('/report', (req, res) => {
-    console.log(req);
     const id = req.body.id;
     console.log(id);
     var options = {
         'method': 'GET',
         'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
         'headers': {
-            'accept': "application/json",
-            "Content-Type": "application/json",
-            'Authorization': idToken
+            'Authorization': idToken,
+            'Cookie': 'session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiN2E5MGFhOTZmMGRhM2M4ODJjZTU2YTI0MjI2ODI5Nzc4NWNkMjdiYyJ9.YUS8JQ.8fB5ZXkKXiowXzGvB2mCzjHOd4M'
         },
 
     };
-    request(options, function(error, response) {
+    request(options, (error, response) => {
         if (error) throw new Error(error);
         res.send(response.body)
         console.log(response.body);
