@@ -56,14 +56,14 @@ router.post('/report', (req, res) => {
         'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
         'headers': {
             'Authorization': idToken,
-            'Cookie': 'session=eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiN2E5MGFhOTZmMGRhM2M4ODJjZTU2YTI0MjI2ODI5Nzc4NWNkMjdiYyJ9.YUS8JQ.8fB5ZXkKXiowXzGvB2mCzjHOd4M'
         },
+        responseType: "blob"
 
     };
     request(options, (error, response) => {
         if (error) throw new Error(error);
         res.send(response.body)
-        console.log(response.body);
+        console.log(response);
     });
 
 })
@@ -123,23 +123,4 @@ router.post('/getPlans', (req, res) => {
         console.log(response.body);
     });
 })
-router.post('report_pdf', (res, req) => {
-    const id = req.body.id;
-    console.log(id);
-    var options = {
-        'method': 'GET',
-        'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
-        'headers': {
-            'Authorization': idToken,
-        },
-        responseType: "blob"
-
-    };
-    request(options, (error, response) => {
-        if (error) throw new Error(error);
-        res.send(response.body)
-        console.log(response.body);
-    });
-})
-
 module.exports = router;
