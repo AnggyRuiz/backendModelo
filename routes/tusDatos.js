@@ -57,12 +57,10 @@ router.post('/report', (req, res) => {
         'headers': {
             'Authorization': idToken,
         },
-        responseType: "blob"
-
     };
     request(options, (error, response) => {
         if (error) throw new Error(error);
-        res.send(response.body)
+        res.send(response)
         console.log(response);
     });
 
