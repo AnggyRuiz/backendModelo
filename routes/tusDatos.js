@@ -123,5 +123,23 @@ router.post('/getPlans', (req, res) => {
         console.log(response.body);
     });
 })
+router.post('report_pdf', (res, req) => {
+    const id = req.body.id;
+    console.log(id);
+    var options = {
+        'method': 'GET',
+        'url': `  https://dash-board.tusdatos.co/api/report_pdf/${id}`,
+        'headers': {
+            'Authorization': idToken,
+        },
+        responseType: "blob"
+
+    };
+    request(options, (error, response) => {
+        if (error) throw new Error(error);
+        res.send(response.body)
+        console.log(response.body);
+    });
+})
 
 module.exports = router;
