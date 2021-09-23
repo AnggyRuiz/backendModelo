@@ -60,7 +60,7 @@ router.post('/report', rawParser, (req, res) => {
         'url': `https://dash-board.tusdatos.co/api/report_pdf/${id}`,
         'headers': {
             'Authorization': idToken,
-            'Content-Type': 'application/pdf'
+            'Content-Type': 'application/json'
         },
     };
     request(options, function(error, resp) {
