@@ -70,6 +70,7 @@ router.post('/report', rawParser, (req, res) => {
         res.setHeader('Content-Description', 'File Transfer')
             /* var stat = fs.statSync(resp);
             console.log(stat); */
+        console.log(resp);
         res.send(resp)
             //file.pipe(res);
             /*  var file = fs.createReadStream(resp);
