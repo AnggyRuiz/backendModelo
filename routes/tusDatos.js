@@ -71,7 +71,7 @@ router.post('/report', rawParser, (req, res) => {
             /* var stat = fs.statSync(resp);
             console.log(stat); */
         console.log(resp);
-        res.send(resp)
+        res.json(resp)
             //file.pipe(res);
             /*  var file = fs.createReadStream(resp);
              res.setHeader('Content-Length', stat.size);
