@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const request = require('request');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser')
-router.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
-var rawParser = bodyParser.raw()
-var axios = require('axios');
-var fs = require('fs')
+var bodyParser = require('body-parser');
+router.use(bodyParser.raw({ type: '*/*' }))
+var fs = require('fs');
+var pdf = require('html-pdf');
 
 //PROD
 const username = 'sosorno@isciolab.com';
@@ -52,54 +51,33 @@ router.post('/launch', (req, res) => {
         console.log(response.body)
     })
 })
-router.post('/report', rawParser, (req, res) => {
+router.post('/report', (req, res) => {
     const id = req.body.id;
     console.log(id);
     var options = {
         'method': 'GET',
-        'url': `https://dash-board.tusdatos.co/api/report_pdf/${id}`,
+        "responseType": 'arraybuffer',
+        'responseEncoding': 'binary',
+        'url': `https://dash-board.tusdatos.co/api/report/${id}`,
         'headers': {
             'Authorization': idToken,
             'Content-Type': 'application/json'
         },
+
+
     };
-    request(options, function(error, resp) {
+    request(options, function(error, resp, body) {
         if (error) throw new Error(error);
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'filename=tusdatos-1032456318-15-09-2021.pdf')
-        res.setHeader('Content-Description', 'File Transfer')
-            /* var stat = fs.statSync(resp);
-            console.log(stat); */
-        console.log(resp);
-        res.json(resp)
-            //file.pipe(res);
-            /*  var file = fs.createReadStream(resp);
-             res.setHeader('Content-Length', stat.size);
-             res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-              */
-    });
-
-
-
-    /* var config = {
-        method: 'get',
-        url: 'https://dash-board.tusdatos.co/api/report_pdf/61421ff79368cc94120e0fc1',
-        headers: {
-            'Authorization': 'Basic c29zb3Jub0Bpc2Npb2xhYi5jb206VGVsbW8yMDIx'
-        }
-    };
- 
-    axios(config)
-        .then(function(response) {
-            console.log(JSON.stringify(response.data));
-            res.send(JSON.stringify(response.data));
-        })
-        .catch(function(error) {
-            console.log(error);
+        var options = { format: 'Letter' };
+        pdf.create(body, options).toFile('./businesscard.pdf', function(err, response) {
+            if (err) return console.log(err);
+            console.log(response); // { filename: '/app/businesscard.pdf' }
         });
- */
 
-})
+
+    })
+
+});
 router.post('/result', (req, res) => {
     console.log(req.body.jobkey);
     const id = req.body.jobkey;
@@ -120,7 +98,7 @@ router.post('/result', (req, res) => {
         res.send(response.body)
         console.log(response.body);
     });
-})
+});
 router.post('/retry', (req, res) => {
     console.log(req.body.id);
     const id = req.body.id;
@@ -140,7 +118,7 @@ router.post('/retry', (req, res) => {
         res.send(response.body)
         console.log(response.body);
     });
-})
+});
 router.post('/getPlans', (req, res) => {
     var options = {
         'method': 'GET',
@@ -156,5 +134,5 @@ router.post('/getPlans', (req, res) => {
         res.send(response.body)
         console.log(response.body);
     });
-})
+});
 module.exports = router;
