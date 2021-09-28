@@ -58,21 +58,21 @@ router.post('/report', (req, res) => {
         'method': 'GET',
         "responseType": 'arraybuffer',
         'responseEncoding': 'binary',
-        'url': `https://dash-board.tusdatos.co/api/report/${id}`,
+        'url': `https://dash-board.tusdatos.co/api/report_pdf/${id}`,
         'headers': {
             'Authorization': idToken,
             'Content-Type': 'application/json'
+
         },
 
 
     };
     request(options, function(error, resp, body) {
         if (error) throw new Error(error);
-        var options = { format: 'Letter' };
-        pdf.create(body, options).toFile('./businesscard.pdf', function(err, response) {
-            if (err) return console.log(err);
-            console.log(response); // { filename: '/app/businesscard.pdf' }
-        });
+        var data = fs.readFileSync('./prueba.pdf');
+        res.contentType("application/pdf");
+        res.send(data);
+
 
 
     })
