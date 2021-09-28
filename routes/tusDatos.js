@@ -58,7 +58,7 @@ router.post('/report', (req, res) => {
         'method': 'GET',
         "responseType": 'arraybuffer',
         'responseEncoding': 'binary',
-        'url': `https://dash-board.tusdatos.co/api/report_pdf/${id}`,
+        'url': `https://dash-board.tusdatos.co/api/report/${id}`,
         'headers': {
             'Authorization': idToken,
             'Content-Type': 'application/json'
@@ -69,15 +69,52 @@ router.post('/report', (req, res) => {
     };
     request(options, function(error, resp, body) {
         if (error) throw new Error(error);
-        var data = fs.readFileSync('./prueba.pdf');
-        res.contentType("application/pdf");
-        res.send(data);
+        console.log(body)
+        res.send(body)
 
+        /*  fs.writeFile('output.pdf', body, function(err) {
+             if (err) {
+                 console.log(err);
+             } else {
+                 console.log('ok.');
+                 var data = fs.readFileSync('output.pdf');
+                 res.contentType("application/pdf");
+                 res.send(data);
+             }
+         }) */
 
 
     })
 
 });
+
+
+router.post('/report2', (req, res) => {
+    const id = req.body.id;
+    console.log(id);
+    var options = {
+        'method': 'GET',
+        "responseType": 'arraybuffer',
+        'responseEncoding': 'binary',
+        'url': `https://dash-board.tusdatos.co/api/report2/${id}`,
+        'headers': {
+            'Authorization': idToken,
+            'Content-Type': 'application/json'
+
+        },
+
+
+    };
+    request(options, function(error, resp, body) {
+        if (error) throw new Error(error);
+        console.log(body)
+        res.send(body)
+    })
+
+});
+
+
+
 router.post('/result', (req, res) => {
     console.log(req.body.jobkey);
     const id = req.body.jobkey;
