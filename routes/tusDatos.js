@@ -7,12 +7,14 @@ var fs = require('fs');
 var pdf = require('html-pdf');
 
 //PROD
-const username = 'sosorno@isciolab.com';
-const password = 'Telmo2021';
+/* const username = 'sosorno@isciolab.com';
+const password = 'Telmo2021'; 
+const url = 'https://dash-board.tusdatos.co'*/
 //Desarrollo
 
-/* const username = 'pruebas';
-const password = 'password'; */
+const username = 'pruebas';
+const password = 'password';
+const url = 'http://docs.tusdatos.co';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
 router.post('/launch', (req, res) => {
@@ -26,7 +28,7 @@ router.post('/launch', (req, res) => {
 
     var options = {
         'method': 'POST',
-        'url': '  https://dash-board.tusdatos.co/api/launch',
+        'url': 'http://docs.tusdatos.co/api/launch',
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -58,7 +60,7 @@ router.post('/report', (req, res) => {
         'method': 'GET',
         "responseType": 'arraybuffer',
         'responseEncoding': 'binary',
-        'url': `https://dash-board.tusdatos.co/api/report/${id}`,
+        'url': `${url}/api/report/${id}`,
         'headers': {
             'Authorization': idToken,
             'Content-Type': 'application/json'
@@ -96,7 +98,7 @@ router.post('/report2', (req, res) => {
         'method': 'GET',
         "responseType": 'arraybuffer',
         'responseEncoding': 'binary',
-        'url': `https://dash-board.tusdatos.co/api/report2/${id}`,
+        'url': `${url}/api/report2/${id}`,
         'headers': {
             'Authorization': idToken,
             'Content-Type': 'application/json'
@@ -122,7 +124,7 @@ router.post('/result', (req, res) => {
 
     var options = {
         'method': 'GET',
-        'url': `  https://dash-board.tusdatos.co/api/results/${id}`,
+        'url': `  ${url}/api/results/${id}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -143,7 +145,7 @@ router.post('/retry', (req, res) => {
     console.log(typedoc);
     var options = {
         'method': 'GET',
-        'url': `  https://dash-board.tusdatos.co/api/retry/${id}?typedoc=${typedoc}`,
+        'url': `  ${url}/api/retry/${id}?typedoc=${typedoc}`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
@@ -159,7 +161,7 @@ router.post('/retry', (req, res) => {
 router.post('/getPlans', (req, res) => {
     var options = {
         'method': 'GET',
-        'url': ' https://dash-board.tusdatos.co/api/plans',
+        'url': ' ${url}/api/plans',
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
