@@ -7,14 +7,14 @@ var fs = require('fs');
 var pdf = require('html-pdf');
 
 //PROD
-/* const username = 'sosorno@isciolab.com';
-const password = 'Telmo2021'; 
-const url = 'https://dash-board.tusdatos.co'*/
-//Desarrollo
-
-const username = 'pruebas';
-const password = 'password';
-const url = 'http://docs.tusdatos.co';
+const username = 'sosorno@isciolab.com';
+const password = 'Telmo2021';
+const url = 'https://dash-board.tusdatos.co'
+    //Desarrollo
+    /* 
+    const username = 'pruebas';
+    const password = 'password';
+    const url = 'http://docs.tusdatos.co'; */
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
 router.post('/launch', (req, res) => {
@@ -28,7 +28,7 @@ router.post('/launch', (req, res) => {
 
     var options = {
         'method': 'POST',
-        'url': 'http://docs.tusdatos.co/api/launch',
+        'url': `${url}/api/launch`,
         'headers': {
             'accept': "application/json",
             "Content-Type": "application/json",
