@@ -89,7 +89,42 @@ router.post('/report', (req, res) => {
     })
 
 });
+router.post('/report_nit', (req, res) => {
+    const id = req.body.id;
+    console.log(id);
+    var options = {
+        'method': 'GET',
+        "responseType": 'arraybuffer',
+        'responseEncoding': 'binary',
+        'url': `${url}/api/report_nit/${id}`,
+        'headers': {
+            'Authorization': idToken,
+            'Content-Type': 'application/json'
 
+        },
+
+
+    };
+    request(options, function(error, resp, body) {
+        if (error) throw new Error(error);
+        console.log(body)
+        res.send(body)
+
+        /*  fs.writeFile('output.pdf', body, function(err) {
+             if (err) {
+                 console.log(err);
+             } else {
+                 console.log('ok.');
+                 var data = fs.readFileSync('output.pdf');
+                 res.contentType("application/pdf");
+                 res.send(data);
+             }
+         }) */
+
+
+    })
+
+});
 
 router.post('/report2', (req, res) => {
     const id = req.body.id;
