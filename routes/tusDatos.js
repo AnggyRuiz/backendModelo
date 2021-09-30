@@ -107,7 +107,7 @@ router.post('/report_nit', (req, res) => {
     };
     request(options, function(error, resp, body) {
         if (error) throw new Error(error);
-        console.log(body)
+        console.log(resp)
         res.send(body)
 
         /*  fs.writeFile('output.pdf', body, function(err) {

@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
             user: req.user
         }
     })
+    console.log(req.user);
 })
 
 module.exports = router
