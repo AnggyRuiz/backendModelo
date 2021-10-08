@@ -7,13 +7,13 @@ var fs = require('fs');
 var pdf = require('html-pdf');
 
 //PROD
-const username = 'sosorno@isciolab.com';
+/* const username = 'sosorno@isciolab.com';
 const password = 'Telmo2021';
-const url = 'https://dash-board.tusdatos.co'
-    //Desarrollo
-    /* const url = "http://docs.tusdatos.co"
-    const username = 'pruebas';
-    const password = 'password'; */
+const url = 'https://dash-board.tusdatos.co' */
+//Desarrollo
+const url = "http://docs.tusdatos.co"
+const username = 'pruebas';
+const password = 'password';
 const idToken = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
 router.post('/launch', (req, res) => {
