@@ -6,7 +6,6 @@ const trxShema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: true,
         min: 4,
         max: 255
     },
